@@ -5,14 +5,14 @@ Update-ExecutionPolicy Unrestricted
 
 
 # Packages
-cinst -y cmder -pre
+#cinst -y cmder -pre
 
 #DevEnv
 cinst -y virtualbox
-cinst -y virtualbox-extensionpack
+#cinst -y virtualbox-extensionpack
 cinst -y vagrant
 
-if (Test-PendingReboot) { Invoke-Reboot }
+#if (Test-PendingReboot) { Invoke-Reboot }
 
 
 ## Git
@@ -23,7 +23,7 @@ cinst -y git-credential-winstore
 
 if (Test-PendingReboot) { Invoke-Reboot }
 
-mkdir D:/Vagrant/aaa-devbox-cent7 | cd
-vagrant init onderogluserdar/aaa-devbox-cent7
+#mkdir D:/Vagrant/aaa-devbox-cent7 | cd
+#vagrant init onderogluserdar/aaa-devbox-cent7
 
 
