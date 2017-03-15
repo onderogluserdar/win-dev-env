@@ -1,0 +1,26 @@
+# Configure Windows
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtectedOSFiles -EnableShowFileExtensions -EnableShowFullPathInTitleBar
+
+Update-ExecutionPolicy Unrestricted
+
+
+# Packages
+cinst -y cmder -pre
+
+#DevEnv
+cinst -y virtualbox
+cinst -y virtualbox-extensionpack
+cinst -y vagrant
+
+if (Test-PendingReboot) { Invoke-Reboot }
+
+
+## Git
+cinst -y git.install
+#cinst -y poshgit
+cinst -y git-credential-winstore
+#cinst -y github
+
+if (Test-PendingReboot) { Invoke-Reboot }
+
+
