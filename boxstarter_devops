@@ -23,4 +23,7 @@ cinst -y git-credential-winstore
 
 if (Test-PendingReboot) { Invoke-Reboot }
 
+mkdir D:/Vagrant/aaa-devbox-cent7 | cd
+vagrant init onderogluserdar/aaa-devbox-cent7
+
 
