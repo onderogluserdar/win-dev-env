@@ -5,8 +5,6 @@ function init
     Param(
         [switch] $Force
     )
-    #do
-    #{
 
     if(!(Test-Admin)) {
         Write-Host "User is not running with administrative rights. Attempting to elevate..."
@@ -17,7 +15,7 @@ function init
          cls
          Write-Host "`n================ Heyy $env:Username, Welcome to ""I AM A GREAT AUTOMATION TOOL"" Application ================ `n"
          Write-Host "I know that you're suffering everytime when you have to set a new development environment or you have a new/fresh installed computer. `n"
-         Write-Host "Don't Worry Honey! I'm here for you and I will make everything you need ready just for you ;) Love you! xoxo `n" 
+         Write-Host "Don't Worry Buddy! I'm here for you and I will make everything you need ready just for you ;) `n" 
          Write-Host "After answering a few questions, Please Sit Back and Relax!. `n" 
          Write-Host "INHALE slowly through your nose and EXHALE from your mouth! :D `n"
          
@@ -26,17 +24,14 @@ function init
          switch ($input)
          {
                '1' {
-                    #cls
                     $global:packages = "cmder", "jre8", "jdk8", "googlechrome", "7zip.install", "wireshark", "SublimeText3", "winscp.install", "git.install", "git-credential-winstore", "github", "virtualbox", "vagrant"
                     DisplayPackages
                } 
                '2' {
-                    #cls
                     $global:packages = "git.install", "git-credential-winstore", "github", "virtualbox", "vagrant"
                     DisplayPackages
                } 
                '3' {
-                    #cls
                     AddPackagetoList                    
                } 'q' {
                     return
@@ -46,9 +41,6 @@ function init
          NeedtoAddPackage
          Write-Host "Package List Confirmed. Let the game begin! :D"
          Get-DevEnv
-
-    #}
-    #until($input -eq 'q')
 }
 
 function Show-Menu
@@ -64,15 +56,16 @@ function Show-Menu
          {jre8/jdk8, GoogleChrome, 7zip, wireshark, SublimeText3, winscp, git, github, virtualbox, vagrant} `n"
          Write-Host "2: Press '2' to install DevBox Packagel:
          {git, github, virtualbox, vagrant} `n"
-         Write-Host "3: Press '3' to create your package"
+         Write-Host "3: Press '3' to create your package `n"
          Write-Host "Q: Press 'Q' to quit. `n"
     }
-    elseif ($stepcounter -eq 2) {
-         Write-Host "`n`n ================ Vagrant Box Installation================ `n"
+    #TODO 
+    #elseif ($stepcounter -eq 2) {
+    #     Write-Host "`n`n ================ Vagrant Box Installation================ `n"
      
-         Write-Host "Do you want me to create a linux development environment for you? "
-         Write-Host "Q: Press 'Q' to quit. `n"
-    }
+    #     Write-Host "Do you want me to create a linux development environment for you? "
+    #     Write-Host "Q: Press 'Q' to quit. `n"
+    #}
 }
 
 function NeedtoAddPackage
@@ -85,17 +78,10 @@ function NeedtoAddPackage
 	    $answer = Read-Host "Yes (Y) or NO (N)"
     }
     if("y", "yes" -contains $answer){
-        Write-Warning "Please check package names from the https://chocolatey.org/packages"
         AddPackagetoList
-        #return $true
     }
-    #else{
-    #     return
-    #}
 
     Check-Confirm
-   
-
 }
 
 function Check-Confirm
@@ -117,6 +103,7 @@ function Check-Confirm
 
 function AddPackagetoList
 {
+    Write-Warning "Please check package names from https://chocolatey.org/packages"
     $input = ''
     do {
         $input = (Read-Host "Please enter package name")
@@ -139,7 +126,6 @@ function Get-DevEnv {
         [switch] $Force
     )
 
-    #Write-Output "================ Heyy $env:Username, Welcome to the Windows Development Environment installer!================ `n"
     if(Check-Chocolatey -Force:$Force){
         Write-Output "Chocolatey installed, Installing DevOps Tools. `n"
         $version = choco -v
@@ -152,21 +138,20 @@ function Get-DevEnv {
             try{
                 cinst -y $package
                 #Invoke-Expression $command
-                $SMessage += "$package Installation completed`n"
+                $Message += "$package Installation completed`n"
             }
             catch{
                 #Invoke-Expression $command
-                $FMessage += "$package Installation failed!`n"
+                $Message += "$package Installation failed!`n"
             }
-            #Write-Host $Message
         }
-
-        Show-Menu 2
         
     }
     else {
         $Message = "Did not detect Chocolatey and unable to install. Installation  has been aborted."
     }
+     
+     Write-Host $Message
 
 }
 
